@@ -1,0 +1,45 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'    
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+tasks.assemble.dependsOn tasks.shadowJar
+tasks.build.dependsOn tasks.shadowJar
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+shadowJar {        
+    archiveFileName.set("${project.name}.jar")       
+}
+
+dependencies { 
+    implementation files('libs/java-desktop-v24.jar')
+}
+
+publishing {
+    publications {
+        shadow(MavenPublication) { publication ->            
+            groupId = 'org.vulture.ide'
+            artifactId = 'java-desktop'
+            version = 'jdk-24-ea+2' 
+         
+            from project.shadow.component(publication) 
+        }
+    }
+}
