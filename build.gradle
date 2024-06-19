@@ -37,7 +37,7 @@ publishing {
         shadow(MavenPublication) { publication ->            
             groupId = 'org.vulture.ide'
             artifactId = 'java-desktop'
-            version = 'jdk-24-ea+2' 
+            version = 'jdk24-ea2' 
          
             from project.shadow.component(publication) 
         }
