@@ -29,7 +29,7 @@ shadowJar {
 }
 
 dependencies { 
-    implementation files('libs/java-desktop-jdk-21.0.2.jar')
+    implementation files('libs/java-desktop-jdk-17.0.0.jar')
 }
 
 publishing {
@@ -37,7 +37,7 @@ publishing {
         shadow(MavenPublication) { publication ->            
             groupId = 'org.vulture.ide'
             artifactId = 'java-desktop'
-            version = 'jdk21.0.2' 
+            version = 'jdk17.0.0' 
          
             from project.shadow.component(publication) 
         }
